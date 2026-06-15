@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Nam Device Check - Kiểm Tra Phần Cứng Chuyên Nghiệp</title>
+    
+    <!-- Favicon - hiển thị logo trên thanh tab trình duyệt -->
+    <link rel="icon" type="image/png" href="ico.png">
+    <link rel="shortcut icon" href="ico.png">
+    
     <style>
         * {
             margin: 0;
@@ -353,12 +358,12 @@
                 <div style="flex:1; background:#0a0f1a; border-radius:28px; padding:22px; text-align:center; border:1px solid #00ff4133;">
                     <div style="font-size:2rem; color:#00ff41;">[+]</div>
                     <h3 style="margin:12px 0 8px; color:#00ff41;">KIỂM TRA LOA</h3>
-                    <p style="font-size:0.8rem;">Phát file âm thanh chất lượng cao, điều khiển phát hoặc dừng</p>
+                    <p style="font-size:0.8rem;">Phát file âm thanh 001.mp3, điều khiển phát hoặc dừng</p>
                 </div>
                 <div style="flex:1; background:#0a0f1a; border-radius:28px; padding:22px; text-align:center; border:1px solid #00ff4133;">
                     <div style="font-size:2rem; color:#00ff41;">[+]</div>
                     <h3 style="margin:12px 0 8px; color:#00ff41;">PHÂN TÍCH CAMERA</h3>
-                    <p style="font-size:0.8rem;">Hiển thị độ phân giải, megapixel, tên thiết bị và đánh giá trực quan ( có thể bị sai số )</p>
+                    <p style="font-size:0.8rem;">Hiển thị độ phân giải, megapixel, tên thiết bị và đánh giá trực quan</p>
                 </div>
             </div>
         </div>
@@ -399,8 +404,9 @@
         <div class="card">
             <h2>TRÌNH PHÁT ÂM THANH</h2>
             <div class="audio-box">
-                <audio id="testAudio" controls>
+                <audio id="testAudio" controls preload="auto">
                     <source src="001.mp3" type="audio/mpeg">
+                    Trình duyệt không hỗ trợ phát âm thanh.
                 </audio>
                 <div style="margin:20px 0; display:flex; gap:15px; justify-content:center;">
                     <button id="playAudioBtn">PHÁT</button>
