@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Nam Device Check - Bộ Kiểm Tra Phần Cứng Chuyên Nghiệp</title>
     
-    <!-- Logo và Favicon -->
     <link rel="icon" type="image/png" href="https://images2.imgbox.com/e8/58/5YNpQE3K_o.png">
     <link rel="shortcut icon" href="https://images2.imgbox.com/e8/58/5YNpQE3K_o.png">
     
@@ -23,7 +22,6 @@
             overflow-x: hidden;
         }
 
-        /* Matrix Background */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -49,7 +47,6 @@
             z-index: 10;
         }
 
-        /* Navbar */
         .navbar {
             background: rgba(10, 15, 25, 0.85);
             backdrop-filter: blur(15px);
@@ -116,7 +113,6 @@
             transform: translateY(-2px);
         }
 
-        /* Nội dung chính */
         .page {
             display: none;
             max-width: 1400px;
@@ -130,7 +126,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cards */
         .card {
             background: rgba(15, 20, 30, 0.7);
             backdrop-filter: blur(12px);
@@ -160,7 +155,6 @@
             font-size: 1rem;
         }
 
-        /* Feature Grid */
         .feature-grid {
             display: flex;
             flex-wrap: wrap;
@@ -187,77 +181,168 @@
             font-weight: bold;
         }
 
-        /* Audio Box - 7 màu + Visualizer */
-        .audio-box {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 50px;
-            padding: 30px;
+        /* ===== KHU VỰC TEST LOA - PHONG CÁCH KTV DJ ===== */
+        .ktv-audio-box {
+            background: linear-gradient(180deg, #0a0f1a 0%, #050810 100%);
+            border-radius: 60px;
+            padding: 40px 30px 30px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 60px rgba(0,255,65,0.1), inset 0 0 60px rgba(0,255,65,0.05);
         }
         
-        /* Khung viền 7 màu */
-        .audio-box::before {
+        /* Khung viền 7 màu chạy - hiệu ứng LED KTV */
+        .ktv-audio-box::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 400% 100%;
-            border-radius: 52px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 800% 100%;
+            border-radius: 62px;
             z-index: -1;
-            animation: borderRainbow 2s linear infinite;
+            animation: djBorder 3s linear infinite;
         }
-        
-        @keyframes borderRainbow {
+        @keyframes djBorder {
             0% { background-position: 0% 50%; }
-            100% { background-position: 400% 50%; }
+            100% { background-position: 800% 50%; }
         }
         
-        /* Visualizer Canvas */
+        /* Hiệu ứng ánh sáng phía sau */
+        .ktv-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 80%, rgba(0,255,65,0.08) 0%, transparent 70%);
+            pointer-events: none;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        /* Màn hình Visualizer - style DJ */
+        .dj-visualizer-wrapper {
+            position: relative;
+            background: rgba(0,0,0,0.8);
+            border-radius: 40px;
+            padding: 8px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 0 30px rgba(0,255,65,0.05);
+        }
+        .dj-visualizer-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0,255,65,0.3) 50%, transparent 100%);
+            border-radius: 42px;
+            pointer-events: none;
+            z-index: 2;
+        }
         .visualizer-canvas {
             width: 100%;
-            height: 120px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 30px;
-            margin-bottom: 20px;
+            height: 180px;
+            border-radius: 36px;
             display: block;
+            background: #000;
         }
         
-        audio {
-            width: 100%;
-            max-width: 500px;
-            margin: 15px 0;
-            border-radius: 30px;
-        }
-        
-        .audio-controls {
+        /* Thanh trạng thái sóng - style KTV */
+        .wave-status {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 15px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px 15px;
+            font-size: 0.7rem;
+            color: #4a6a5a;
+            font-family: monospace;
+        }
+        .wave-status .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: dotBlink 1s ease-in-out infinite;
+        }
+        .wave-status .dot.active { background: #00ff41; box-shadow: 0 0 10px #00ff41; }
+        .wave-status .dot.inactive { background: #2a3a2a; }
+        @keyframes dotBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
         
-        .audio-btn {
-            background: #111;
+        /* Bộ điều khiển - style DJ */
+        .dj-controls {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            background: rgba(0,0,0,0.4);
+            padding: 15px 30px;
+            border-radius: 60px;
+            border: 1px solid rgba(0,255,65,0.15);
+        }
+        .dj-btn {
+            background: linear-gradient(135deg, #111, #1a1f2e);
             border: 1px solid #00ff41;
             color: #00ff41;
-            padding: 10px 30px;
+            padding: 12px 35px;
             border-radius: 50px;
             font-weight: bold;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: monospace;
+            box-shadow: 0 0 15px rgba(0,255,65,0.05);
         }
-        
-        .audio-btn:hover {
+        .dj-btn:hover {
             background: #00ff41;
             color: #000;
-            box-shadow: 0 0 15px #00ff41;
+            box-shadow: 0 0 30px #00ff41;
+            transform: scale(1.05);
         }
-
+        .dj-btn.play-btn {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0,255,65,0.3);
+        }
+        .dj-btn.play-btn:hover {
+            box-shadow: 0 0 40px rgba(0,255,65,0.6);
+        }
+        .dj-btn.stop-btn {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        .dj-btn.stop-btn:hover {
+            background: #ff4444;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255,68,68,0.3);
+        }
+        
+        /* File audio */
+        .dj-audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 15px;
+            border-radius: 30px;
+            background: rgba(0,0,0,0.5);
+            filter: drop-shadow(0 0 10px rgba(0,255,65,0.1));
+        }
+        
         /* Bàn phím */
         .keyboard-wrapper {
             overflow-x: auto;
@@ -333,7 +418,6 @@
             font-size: 0.75rem;
         }
 
-        /* Camera */
         .camera-grid {
             display: flex;
             flex-wrap: wrap;
@@ -361,7 +445,6 @@
             color: #aaffaa;
         }
 
-        /* Donate */
         .donate-box {
             text-align: center;
             background: linear-gradient(145deg, #0a1a0a, #051005);
@@ -386,11 +469,29 @@
             margin-top: 40px;
         }
         
+        /* Layout Selector - Bổ sung */
+        .layout-selector-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .layout-selector-group label {
+            color: #00ff41;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 800px) {
             .key { min-width: 42px; font-size: 0.7rem; padding: 6px 2px; }
             .key.space { min-width: 150px; }
             .nav-btn { padding: 6px 16px; font-size: 0.75rem; }
             .card { padding: 20px; }
+            .ktv-audio-box { padding: 20px 15px; border-radius: 40px; }
+            .visualizer-canvas { height: 120px; }
+            .dj-controls { padding: 12px 20px; gap: 15px; }
+            .dj-btn { padding: 8px 20px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -419,13 +520,13 @@
     <div id="homePage" class="page active-page">
         <div class="card">
             <h2>NAM DEVICE CHECK - KIỂM TRA PHẦN CỨNG TOÀN DIỆN</h2>
-            <p>Công cụ kiểm tra chuyên nghiệp với giao diện ma trận cao cấp. Hỗ trợ kiểm tra bàn phím với 7 layout, kiểm tra loa với thanh sóng âm thanh 7 màu, phân tích camera chi tiết và chính xác.</p>
+            <p>Công cụ kiểm tra chuyên nghiệp với giao diện ma trận cao cấp. Hỗ trợ kiểm tra bàn phím với 7 layout, kiểm tra loa với giao diện KTV DJ sóng nhạc 7 màu, phân tích camera chi tiết và chính xác.</p>
         </div>
         <div class="card">
             <h2>TÍNH NĂNG CHÍNH</h2>
             <div class="feature-grid">
                 <div class="feature-item"><div class="feature-icon">[+]</div><h3>BÀN PHÍM ĐA DẠNG</h3><p>7 layout từ 40 đến 100 phần trăm, giữ màu xanh khi gõ, tùy chỉnh kích thước phím</p></div>
-                <div class="feature-item"><div class="feature-icon">[+]</div><h3>ÂM THANH 7 MÀU</h3><p>Thanh sóng nhạc nhảy theo tần số, khung viền cầu vồng chuyển động</p></div>
+                <div class="feature-item"><div class="feature-icon">[+]</div><h3>LOA KTV DJ</h3><p>Sóng nhạc 7 màu, hiệu ứng ánh sáng, giao diện như phòng KTV xịn</p></div>
                 <div class="feature-item"><div class="feature-icon">[+]</div><h3>CAMERA THÔNG MINH</h3><p>Hiển thị độ phân giải, megapixel, tên thiết bị, màu sắc và độ sáng</p></div>
             </div>
         </div>
@@ -453,18 +554,29 @@
         </div>
     </div>
 
-    <!-- TRANG LOA - VISUALIZER + 7 MÀU -->
+    <!-- TRANG LOA - PHONG CÁCH KTV DJ -->
     <div id="audioPage" class="page">
         <div class="card">
-            <h2>TRÌNH PHÁT ÂM THANH 7 MÀU</h2>
-            <div class="audio-box">
-                <canvas id="visualizer" class="visualizer-canvas" width="800" height="120"></canvas>
-                <audio id="testAudio" controls preload="auto" crossorigin="anonymous">
+            <h2>KTV DJ - SÓNG NHẠC 7 MÀU</h2>
+            <div class="ktv-audio-box">
+                <div class="ktv-glow"></div>
+                
+                <div class="dj-visualizer-wrapper">
+                    <canvas id="visualizer" class="visualizer-canvas" width="1200" height="200"></canvas>
+                </div>
+                
+                <div class="wave-status">
+                    <span><span class="dot" id="statusDot"></span> <span id="statusText">Sẵn sàng</span></span>
+                    <span id="freqDisplay">Tần số: -- Hz</span>
+                </div>
+                
+                <audio id="testAudio" class="dj-audio" controls preload="auto" crossorigin="anonymous">
                     <source src="https://files.catbox.moe/lmos60.mp3" type="audio/mpeg">
                 </audio>
-                <div class="audio-controls">
-                    <button class="audio-btn" id="playAudioBtn">PHÁT</button>
-                    <button class="audio-btn" id="stopAudioBtn">DỪNG</button>
+                
+                <div class="dj-controls">
+                    <button class="dj-btn play-btn" id="playAudioBtn">▶ PHÁT</button>
+                    <button class="dj-btn stop-btn" id="stopAudioBtn">⏹ DỪNG</button>
                 </div>
             </div>
         </div>
@@ -495,13 +607,12 @@
         </div>
     </div>
 
-    <div class="footer">NAM DEVICE CHECK - MA TRẬN CAO CẤP | THANH SÓNG 7 MÀU | KIỂM TRA CHUẨN XÁC</div>
+    <div class="footer">NAM DEVICE CHECK - KTV DJ 7 MÀU | MA TRẬN CAO CẤP | KIỂM TRA CHUẨN XÁC</div>
 </div>
 
 <script>
     // ==================== MATRIX BACKGROUND ====================
     const matrixCanvas = document.createElement('canvas');
-    matrixCanvas.id = 'matrixCanvas';
     matrixCanvas.style.position = 'fixed';
     matrixCanvas.style.top = '0';
     matrixCanvas.style.left = '0';
@@ -573,137 +684,178 @@
     let currentLayout = "full";
     let currentSize = 72;
     
-    function getKeyCode(k, i, row) {
-        if (k === "Shift") return i === 0 ? "ShiftLeft" : "ShiftRight";
-        if (k === "Ctrl") return i === 0 ? "ControlLeft" : "ControlRight";
-        if (k === "Space") return "Space";
-        if (k === "Enter") return "Enter";
-        if (/[A-Z]/.test(k)) return `Key${k}`;
-        if (/[0-9]/.test(k)) return `Digit${k}`;
-        return k;
+    function getKeyCode(keyName, index, rowArray) {
+        if (keyName === "Shift") return index === 0 ? "ShiftLeft" : "ShiftRight";
+        if (keyName === "Ctrl") return index === 0 ? "ControlLeft" : "ControlRight";
+        if (keyName === "Alt") return "AltLeft";
+        if (keyName === "AltGr") return "AltRight";
+        if (keyName === "Win") return "MetaLeft";
+        if (keyName === "Menu") return "ContextMenu";
+        if (keyName === "Fn") return "F13";
+        if (keyName === "Space") return "Space";
+        if (keyName === "Enter") return "Enter";
+        if (keyName === "Backspace") return "Backspace";
+        if (keyName === "Tab") return "Tab";
+        if (keyName === "CapsLock") return "CapsLock";
+        if (keyName === "Esc") return "Escape";
+        if (/^F[1-9][0-2]?$/.test(keyName)) return keyName;
+        if (/^[A-Z]$/.test(keyName)) return `Key${keyName}`;
+        if (/^[0-9]$/.test(keyName)) return `Digit${keyName}`;
+        const specialMap = { "`": "Backquote", "-": "Minus", "=": "Equal", "[": "BracketLeft", "]": "BracketRight", "\\": "Backslash", ";": "Semicolon", "'": "Quote", ",": "Comma", ".": "Period", "/": "Slash" };
+        if (specialMap[keyName]) return specialMap[keyName];
+        return keyName;
     }
     
-    function findKey(code) { return document.querySelector(`.key[data-code="${code}"]`); }
+    function findKeyElement(code) { return document.querySelector(`.key[data-code="${code}"]`); }
     
-    function markKey(code) {
+    function markKeyPermanent(code) {
         if (!pressedKeys.has(code)) {
             pressedKeys.add(code);
-            const el = findKey(code);
+            const el = findKeyElement(code);
             if (el) el.classList.add("pressed-permanent");
         }
     }
     
-    function flashKey(code) {
-        const el = findKey(code);
+    function flashKeyTemp(code) {
+        const el = findKeyElement(code);
         if (el) {
             el.classList.add("flash");
             setTimeout(() => el.classList.remove("flash"), 100);
         }
     }
     
-    function addLog(disp, code) {
+    function addKeyLog(display, code) {
         const logDiv = document.getElementById("logListKeyboard");
         if (logDiv.children.length === 1 && logDiv.innerText.includes("sẵn sàng")) logDiv.innerHTML = "";
         const t = new Date().toLocaleTimeString();
         const d = document.createElement("div");
         d.className = "log-line";
-        d.innerHTML = `[${t}] PHÍM: ${disp} - MÃ: ${code}`;
+        d.innerHTML = `[${t}] PHÍM: ${display} - MÃ: ${code}`;
         logDiv.prepend(d);
         while (logDiv.children.length > 30) logDiv.removeChild(logDiv.lastChild);
     }
     
-    function renderKeyboard() {
+    function renderKeyboardLayout() {
         const layout = LAYOUTS[currentLayout];
         if (!layout) return;
-        const cont = document.getElementById("vKeyboard");
-        cont.innerHTML = "";
+        const container = document.getElementById("vKeyboard");
+        container.innerHTML = "";
         const scale = currentSize / 70;
-        const base = 44 * scale;
+        const baseWidth = 44 * scale;
         
         layout.rows.forEach(row => {
             const rowDiv = document.createElement("div");
             rowDiv.className = "key-row";
-            row.forEach((k, idx) => {
+            row.forEach((key, idx) => {
                 const keyDiv = document.createElement("div");
                 keyDiv.className = "key";
-                let disp = k;
-                if (k === "Space") disp = "KHOẢNG TRẮNG";
-                if (k === "Backspace") disp = "XÓA LÙI";
-                keyDiv.innerText = disp;
-                if (k === "Space") keyDiv.classList.add("space");
-                if (["Backspace", "Enter", "Shift", "CapsLock", "Tab"].includes(k)) keyDiv.classList.add("wide");
-                const code = getKeyCode(k, idx, row);
+                let display = key;
+                if (key === "Space") display = "KHOẢNG TRẮNG";
+                if (key === "Backspace") display = "XÓA LÙI";
+                if (key === "Enter") display = "ENTER";
+                if (key === "CapsLock") display = "CAPS";
+                if (key === "Shift") display = "SHIFT";
+                if (key === "Ctrl") display = "CTRL";
+                if (key === "Alt") display = "ALT";
+                if (key === "Win") display = "WIN";
+                if (key === "AltGr") display = "ALT GR";
+                if (key === "Menu") display = "MENU";
+                if (key === "Esc") display = "ESC";
+                if (key === "Tab") display = "TAB";
+                keyDiv.innerText = display;
+                if (key === "Space") keyDiv.classList.add("space");
+                if (["Backspace", "Enter", "Shift", "CapsLock", "Tab", "Ctrl", "Alt", "Win", "AltGr", "Menu", "Esc"].includes(key)) {
+                    keyDiv.classList.add("wide");
+                }
+                const code = getKeyCode(key, idx, row);
                 keyDiv.setAttribute("data-code", code);
                 if (pressedKeys.has(code)) keyDiv.classList.add("pressed-permanent");
-                if (k !== "Space") keyDiv.style.minWidth = Math.max(42, base) + "px";
-                else keyDiv.style.minWidth = Math.max(160, base * 4.5) + "px";
+                if (key !== "Space") keyDiv.style.minWidth = Math.max(42, baseWidth) + "px";
+                else keyDiv.style.minWidth = Math.max(160, baseWidth * 4.5) + "px";
                 keyDiv.style.fontSize = Math.max(8, currentSize * 0.11) + "px";
                 rowDiv.appendChild(keyDiv);
             });
-            cont.appendChild(rowDiv);
+            container.appendChild(rowDiv);
         });
         
         if (layout.hasNumpad && layout.numpadRows) {
-            const np = document.createElement("div");
-            np.style.marginTop = "18px";
-            np.style.borderTop = "1px solid #0f0";
-            np.style.paddingTop = "18px";
+            const npContainer = document.createElement("div");
+            npContainer.style.marginTop = "18px";
+            npContainer.style.borderTop = "1px solid #0f0";
+            npContainer.style.paddingTop = "18px";
             layout.numpadRows.forEach(row => {
-                const rDiv = document.createElement("div");
-                rDiv.className = "key-row";
-                row.forEach(k => {
-                    const kd = document.createElement("div");
-                    kd.className = "key";
-                    kd.innerText = k;
-                    let code = k === "/" ? "NumpadDivide" : k === "*" ? "NumpadMultiply" : k === "-" ? "NumpadSubtract" : k === "+" ? "NumpadAdd" : k === "." ? "NumpadDecimal" : k === "Enter" ? "NumpadEnter" : `Numpad${k}`;
-                    kd.setAttribute("data-code", code);
-                    if (pressedKeys.has(code)) kd.classList.add("pressed-permanent");
-                    kd.style.minWidth = Math.max(42, base) + "px";
-                    rDiv.appendChild(kd);
+                const rowDiv = document.createElement("div");
+                rowDiv.className = "key-row";
+                row.forEach(key => {
+                    const keyDiv = document.createElement("div");
+                    keyDiv.className = "key";
+                    keyDiv.innerText = key;
+                    let code = key === "/" ? "NumpadDivide" : key === "*" ? "NumpadMultiply" : key === "-" ? "NumpadSubtract" : key === "+" ? "NumpadAdd" : key === "." ? "NumpadDecimal" : key === "Enter" ? "NumpadEnter" : `Numpad${key}`;
+                    keyDiv.setAttribute("data-code", code);
+                    if (pressedKeys.has(code)) keyDiv.classList.add("pressed-permanent");
+                    keyDiv.style.minWidth = Math.max(42, baseWidth) + "px";
+                    rowDiv.appendChild(keyDiv);
                 });
-                np.appendChild(rDiv);
+                npContainer.appendChild(rowDiv);
             });
-            cont.appendChild(np);
+            container.appendChild(npContainer);
         }
     }
     
-    function onKey(e) {
+    function handlePhysicalKey(e) {
         if (e.key === "F5") {
             e.preventDefault();
-            resetColors();
+            resetAllColors();
             return;
         }
-        let disp = e.key === " " ? "SPACE" : e.key.toUpperCase();
+        let display = e.key;
+        if (display === " ") display = "SPACE";
+        else if (display === "Tab") display = "TAB";
+        else if (display === "Enter") display = "ENTER";
+        else if (display === "Backspace") display = "XÓA LÙI";
+        else if (display === "CapsLock") display = "CAPS LOCK";
+        else if (display === "Shift") display = "SHIFT";
+        else if (display === "Control") display = "CTRL";
+        else if (display === "Alt") display = "ALT";
+        else if (display === "Meta") display = "WIN";
+        else if (display === "Escape") display = "ESC";
+        else if (display === "ContextMenu") display = "MENU";
+        else if (/^F[1-9][0-2]?$/.test(display)) display = display.toUpperCase();
+        else if (display.length === 1 && display !== " ") display = display.toUpperCase();
+        
         const code = e.code;
-        if (pressedKeys.has(code)) flashKey(code);
-        else markKey(code);
-        addLog(disp, code);
+        if (pressedKeys.has(code)) flashKeyTemp(code);
+        else markKeyPermanent(code);
+        addKeyLog(display, code);
     }
     
-    function resetColors() {
+    function resetAllColors() {
         document.querySelectorAll('#vKeyboard .key').forEach(k => k.classList.remove('pressed-permanent'));
         pressedKeys.clear();
     }
     
-    document.getElementById('layoutSelect').addEventListener('change', e => { currentLayout = e.target.value; renderKeyboard(); });
-    document.getElementById('keySizeSlider').addEventListener('input', e => { currentSize = parseInt(e.target.value); document.getElementById('sizeValue').innerText = currentSize + "%"; renderKeyboard(); });
-    document.getElementById('resetKeyboardColors').addEventListener('click', resetColors);
-    window.addEventListener('keydown', onKey);
-    renderKeyboard();
+    document.getElementById('layoutSelect').addEventListener('change', e => { currentLayout = e.target.value; renderKeyboardLayout(); });
+    document.getElementById('keySizeSlider').addEventListener('input', e => { currentSize = parseInt(e.target.value); document.getElementById('sizeValue').innerText = currentSize + "%"; renderKeyboardLayout(); });
+    document.getElementById('resetKeyboardColors').addEventListener('click', resetAllColors);
+    window.addEventListener('keydown', handlePhysicalKey);
+    renderKeyboardLayout();
 
-    // ==================== VISUALIZER 7 MÀU CHO LOA ====================
+    // ==================== VISUALIZER KTV DJ - SÓNG NHẠC 7 MÀU ====================
     const audioElement = document.getElementById('testAudio');
     const canvasVis = document.getElementById('visualizer');
     const ctxVis = canvasVis.getContext('2d');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const freqDisplay = document.getElementById('freqDisplay');
     
-    function resizeCanvas() {
+    function resizeCanvasVis() {
         const container = canvasVis.parentElement;
-        const width = container.clientWidth - 40;
-        canvasVis.width = width;
-        canvasVis.height = 120;
+        const width = container.clientWidth - 16;
+        canvasVis.width = width || 1200;
+        canvasVis.height = 200;
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    window.addEventListener('resize', resizeCanvasVis);
+    resizeCanvasVis();
     
     let audioContext = null;
     let source = null;
@@ -711,26 +863,50 @@
     let animationId = null;
     let isPlaying = false;
     
+    // Bảng màu 7 màu cầu vồng
     const rainbowColors = ['#ff0000', '#ff7700', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+    
+    // Màu cho hiệu ứng phản chiếu (lấy từ rainbowColors nhưng độ sáng thấp hơn)
+    const glowColors = rainbowColors.map(c => c + '55');
     
     function initAudioContext() {
         if (audioContext) return;
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
+        analyser.fftSize = 512;
         source = audioContext.createMediaElementSource(audioElement);
         source.connect(analyser);
         analyser.connect(audioContext.destination);
         source.connect(audioContext.destination);
     }
     
-    function drawVisualizer() {
+    function drawKTVVisualizer() {
         if (!analyser || !isPlaying) {
+            // Trạng thái tĩnh khi không phát
             ctxVis.fillStyle = '#0a0f1a';
             ctxVis.fillRect(0, 0, canvasVis.width, canvasVis.height);
-            ctxVis.fillStyle = '#00ff41';
-            ctxVis.font = '12px monospace';
-            ctxVis.fillText('NHAN PHAT DE XEM SONG NHAC 7 MAU', canvasVis.width/2 - 150, canvasVis.height/2);
+            
+            // Vẽ chữ mờ
+            ctxVis.fillStyle = '#2a3a2a';
+            ctxVis.font = 'bold 24px monospace';
+            ctxVis.textAlign = 'center';
+            ctxVis.fillText('🎵 NHẤN PHÁT ĐỂ BẮT ĐẦU 🎵', canvasVis.width/2, canvasVis.height/2 + 8);
+            ctxVis.fillStyle = '#1a2a1a';
+            ctxVis.font = '14px monospace';
+            ctxVis.fillText('SÓNG NHẠC 7 MÀU - KTV DJ', canvasVis.width/2, canvasVis.height/2 + 40);
+            
+            // Vẽ các vạch mờ trang trí
+            const barCount = 64;
+            const barWidth = (canvasVis.width / barCount) * 1.2;
+            for (let i = 0; i < barCount; i++) {
+                const height = 4 + Math.random() * 8;
+                ctxVis.fillStyle = '#1a2a1a';
+                ctxVis.fillRect(i * barWidth + 2, canvasVis.height - height, barWidth - 2, height);
+            }
+            
+            statusDot.className = 'dot inactive';
+            statusText.innerText = 'Sẵn sàng';
+            freqDisplay.innerText = 'Tần số: -- Hz';
             return;
         }
         
@@ -738,26 +914,68 @@
         const dataArray = new Uint8Array(bufferLength);
         analyser.getByteFrequencyData(dataArray);
         
-        ctxVis.fillStyle = '#0a0f1a';
+        // Xóa nền
+        const gradient = ctxVis.createLinearGradient(0, 0, 0, canvasVis.height);
+        gradient.addColorStop(0, '#0a0f1a');
+        gradient.addColorStop(1, '#050810');
+        ctxVis.fillStyle = gradient;
         ctxVis.fillRect(0, 0, canvasVis.width, canvasVis.height);
         
-        const barWidth = (canvasVis.width / bufferLength) * 2.5;
-        let x = 0;
+        // Vẽ hiệu ứng ánh sáng nền - phản chiếu sóng
+        const barCount = Math.min(bufferLength, 200);
+        const barWidth = (canvasVis.width / barCount) * 1.5;
+        const center = canvasVis.height / 2;
         
-        for (let i = 0; i < bufferLength; i++) {
-            const value = dataArray[i];
+        // Vẽ cột sóng chính (nổi trên cùng)
+        for (let i = 0; i < barCount; i++) {
+            const value = dataArray[i] || 0;
             const percent = value / 255;
-            const barHeight = percent * canvasVis.height;
+            const barHeight = percent * (canvasVis.height * 0.85);
             const colorIndex = i % rainbowColors.length;
             
+            // Hiệu ứng phản chiếu (mờ phía dưới)
+            const glowHeight = barHeight * 0.3;
+            ctxVis.fillStyle = glowColors[colorIndex];
+            ctxVis.fillRect(i * barWidth + 1, canvasVis.height - glowHeight, barWidth - 1, glowHeight);
+            
+            // Cột chính
             ctxVis.fillStyle = rainbowColors[colorIndex];
-            ctxVis.fillRect(x, canvasVis.height - barHeight, barWidth - 1, barHeight);
-            x += barWidth;
+            ctxVis.shadowColor = rainbowColors[colorIndex];
+            ctxVis.shadowBlur = 15;
+            ctxVis.fillRect(i * barWidth + 1, canvasVis.height - barHeight, barWidth - 1, barHeight);
+            ctxVis.shadowBlur = 0;
+            
+            // Đỉnh cột sáng
+            if (barHeight > 10) {
+                ctxVis.fillStyle = '#ffffff';
+                ctxVis.shadowColor = '#ffffff';
+                ctxVis.shadowBlur = 10;
+                ctxVis.fillRect(i * barWidth + 3, canvasVis.height - barHeight - 2, barWidth - 5, 4);
+                ctxVis.shadowBlur = 0;
+            }
         }
         
-        animationId = requestAnimationFrame(drawVisualizer);
+        // Vẽ đường viền sáng đáy
+        ctxVis.fillStyle = 'rgba(0,255,65,0.05)';
+        ctxVis.fillRect(0, canvasVis.height - 2, canvasVis.width, 2);
+        
+        // Cập nhật trạng thái
+        statusDot.className = 'dot active';
+        statusText.innerText = 'Đang phát';
+        
+        // Tính tần số trung bình
+        let sum = 0;
+        for (let i = 0; i < Math.min(bufferLength, 100); i++) {
+            sum += dataArray[i];
+        }
+        const avg = sum / 100;
+        const freq = Math.round(avg / 255 * 2000);
+        freqDisplay.innerText = `Tần số: ${freq} Hz`;
+        
+        animationId = requestAnimationFrame(drawKTVVisualizer);
     }
     
+    // Nút điều khiển
     document.getElementById('playAudioBtn').addEventListener('click', () => {
         if (audioContext && audioContext.state === 'suspended') {
             audioContext.resume();
@@ -769,7 +987,7 @@
         audioElement.play();
         isPlaying = true;
         if (animationId) cancelAnimationFrame(animationId);
-        drawVisualizer();
+        drawKTVVisualizer();
     });
     
     document.getElementById('stopAudioBtn').addEventListener('click', () => {
@@ -779,23 +997,32 @@
         if (animationId) cancelAnimationFrame(animationId);
         ctxVis.fillStyle = '#0a0f1a';
         ctxVis.fillRect(0, 0, canvasVis.width, canvasVis.height);
-        ctxVis.fillStyle = '#00ff41';
-        ctxVis.font = '12px monospace';
-        ctxVis.fillText('NHAN PHAT DE XEM SONG NHAC 7 MAU', canvasVis.width/2 - 150, canvasVis.height/2);
+        ctxVis.fillStyle = '#2a3a2a';
+        ctxVis.font = 'bold 24px monospace';
+        ctxVis.textAlign = 'center';
+        ctxVis.fillText('🎵 NHẤN PHÁT ĐỂ BẮT ĐẦU 🎵', canvasVis.width/2, canvasVis.height/2 + 8);
+        ctxVis.fillStyle = '#1a2a1a';
+        ctxVis.font = '14px monospace';
+        ctxVis.fillText('Nhạc test loa (Em Vẫn Chưa Về Remix G5R Mix YTB)', canvasVis.width/2, canvasVis.height/2 + 40);
+        statusDot.className = 'dot inactive';
+        statusText.innerText = 'Đã dừng';
+        freqDisplay.innerText = 'Tần số: -- Hz';
     });
     
+    // Khởi tạo AudioContext khi người dùng click
     document.body.addEventListener('click', () => {
         if (!audioContext && audioElement) {
             initAudioContext();
         }
     }, { once: true });
     
+    // Sự kiện từ trình phát HTML5
     audioElement.addEventListener('play', () => {
         if (!audioContext) initAudioContext();
         if (audioContext.state === 'suspended') audioContext.resume();
         isPlaying = true;
         if (animationId) cancelAnimationFrame(animationId);
-        drawVisualizer();
+        drawKTVVisualizer();
     });
     
     audioElement.addEventListener('pause', () => {
@@ -803,9 +1030,12 @@
         if (animationId) cancelAnimationFrame(animationId);
         ctxVis.fillStyle = '#0a0f1a';
         ctxVis.fillRect(0, 0, canvasVis.width, canvasVis.height);
-        ctxVis.fillStyle = '#00ff41';
-        ctxVis.font = '12px monospace';
-        ctxVis.fillText('NHAN PHAT DE XEM SONG NHAC 7 MAU', canvasVis.width/2 - 150, canvasVis.height/2);
+        ctxVis.fillStyle = '#2a3a2a';
+        ctxVis.font = 'bold 24px monospace';
+        ctxVis.textAlign = 'center';
+        ctxVis.fillText('🎵 NHẤN PHÁT ĐỂ TIẾP TỤC 🎵', canvasVis.width/2, canvasVis.height/2 + 8);
+        statusDot.className = 'dot inactive';
+        statusText.innerText = 'Tạm dừng';
     });
     
     audioElement.addEventListener('ended', () => {
@@ -813,9 +1043,13 @@
         if (animationId) cancelAnimationFrame(animationId);
         ctxVis.fillStyle = '#0a0f1a';
         ctxVis.fillRect(0, 0, canvasVis.width, canvasVis.height);
-        ctxVis.fillStyle = '#00ff41';
-        ctxVis.font = '12px monospace';
-        ctxVis.fillText('NHAN PHAT DE XEM SONG NHAC 7 MAU', canvasVis.width/2 - 150, canvasVis.height/2);
+        ctxVis.fillStyle = '#2a3a2a';
+        ctxVis.font = 'bold 24px monospace';
+        ctxVis.textAlign = 'center';
+        ctxVis.fillText('🎵 NHẤN PHÁT ĐỂ PHÁT LẠI 🎵', canvasVis.width/2, canvasVis.height/2 + 8);
+        statusDot.className = 'dot inactive';
+        statusText.innerText = 'Đã kết thúc';
+        freqDisplay.innerText = 'Tần số: -- Hz';
     });
 
     // ==================== CAMERA ====================
